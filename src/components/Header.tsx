@@ -1,6 +1,6 @@
 
 import { Link, NavLink } from "react-router-dom";
-import { Olive, Search, ShoppingCart, User, Menu } from "lucide-react";
+import { Leaf, Search, ShoppingCart, User, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
@@ -20,7 +20,7 @@ const Header = () => {
       <div className="container flex h-14 items-center">
         <div className="mr-4 hidden md:flex">
           <Link to="/" className="mr-6 flex items-center space-x-2">
-            <Olive className="h-6 w-6 text-primary" />
+            <Leaf className="h-6 w-6 text-primary" />
             <span className="hidden font-bold sm:inline-block">Burin</span>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium">
@@ -48,7 +48,7 @@ const Header = () => {
               </SheetTrigger>
               <SheetContent side="left">
                 <Link to="/" className="mr-6 flex items-center space-x-2 mb-6">
-                  <Olive className="h-6 w-6 text-primary" />
+                  <Leaf className="h-6 w-6 text-primary" />
                   <span className="font-bold">Burin</span>
                 </Link>
                 <nav className="flex flex-col space-y-4">

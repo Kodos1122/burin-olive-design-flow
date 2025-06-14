@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { Olive, Twitter, Instagram, Facebook } from "lucide-react";
+import { Leaf, Twitter, Instagram, Facebook } from "lucide-react";
 
 const Footer = () => {
   const links = [
@@ -17,7 +17,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex flex-col items-center md:items-start">
              <Link to="/" className="flex items-center space-x-2 mb-4">
-                <Olive className="h-8 w-8 text-primary" />
+                <Leaf className="h-8 w-8 text-primary" />
                 <span className="text-2xl font-bold">Burin</span>
              </Link>
              <div className="flex space-x-4">
