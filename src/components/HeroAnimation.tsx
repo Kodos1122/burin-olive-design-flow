@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment } from '@react-three/drei';
@@ -24,14 +23,13 @@ const Bottle = ({ isTilted, onTiltComplete }: { isTilted: boolean; onTiltComplet
   });
 
   const glassMaterialProps = {
-    color: new THREE.Color("white"),
+    color: new THREE.Color("#1A3326"),
     transmission: 1,
-    roughness: 0,
-    thickness: 0.2,
-    ior: 1.5,
+    roughness: 0.05,
+    thickness: 2.5,
+    ior: 1.52,
     metalness: 0,
     transparent: true,
-    opacity: 0.3,
   };
 
   const oilMaterial = (
@@ -46,7 +44,7 @@ const Bottle = ({ isTilted, onTiltComplete }: { isTilted: boolean; onTiltComplet
   );
 
   return (
-    <group ref={group} position={[0, -1, 0]} scale={2}>
+    <group ref={group} position={[0, -1.5, 0]} scale={2.5}>
       {/* Oil inside */}
       <mesh position={[0, -0.075, 0]}>
           <cylinderGeometry args={[0.7 * 0.95, 0.7 * 0.95, 1.5 * 0.9, 64]} />
@@ -129,7 +127,7 @@ const HeroAnimation = () => {
                 const newDrop = { 
                   id: Date.now() + Math.random(), 
                   // Position calculated to match the new bottle's tilted spout
-                  position: new THREE.Vector3(2.04 + (Math.random() - 0.5) * 0.2, 1.2 + (Math.random() - 0.5) * 0.1, (Math.random() - 0.5) * 0.2)
+                  position: new THREE.Vector3(3.94 + (Math.random() - 0.5) * 0.4, 1.45 + (Math.random() - 0.5) * 0.2, (Math.random() - 0.5) * 0.4)
                 };
                 setDrops(prev => [...prev, newDrop]);
                 dropCount++;
