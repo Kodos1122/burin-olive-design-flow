@@ -1,10 +1,19 @@
 
 import { Link, NavLink } from "react-router-dom";
-import { Leaf, Search, ShoppingCart, User, Menu } from "lucide-react";
+import { Leaf, Search, ShoppingCart, User, Menu, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { useCart } from "@/context/CartContext";
 import { toast } from "sonner";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { Session } from "@supabase/supabase-js";
 
 const navLinks = [
   { to: "/shop", label: "Shop" },
@@ -15,8 +24,28 @@ const navLinks = [
 
 const Header = () => {
   const { cartCount } = useCart();
+  const [session, setSession] = useState<Session | null>(null);
   const activeLinkClass = "text-primary font-semibold";
   const inactiveLinkClass = "hover:text-primary transition-colors";
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    toast.success("Signed out successfully");
+  };
 
   const handleComingSoon = () => {
     toast.info("Feature coming soon!");
@@ -88,9 +117,27 @@ const Header = () => {
                 )}
               </Button>
             </Link>
-            <Button variant="ghost" size="icon" onClick={handleComingSoon}>
-              <User className="h-6 w-6" />
-            </Button>
+            {session ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon">
+                    <User className="h-6 w-6" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={handleSignOut}>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    <span>Log out</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link to="/auth">
+                 <Button variant="ghost" size="icon">
+                    <User className="h-6 w-6" />
+                  </Button>
+              </Link>
+            )}
           </div>
         </div>
       </div>

@@ -11,6 +11,7 @@ import Product from "./pages/Product";
 import About from "./pages/About";
 import Recipes from "./pages/Recipes";
 import Contact from "./pages/Contact";
+import Auth from "./pages/Auth";
 import Checkout from "./pages/Checkout";
 import NotFound from "./pages/NotFound";
 import { CartProvider } from "./context/CartContext";
@@ -32,6 +33,7 @@ const App = () => (
               <Route path="about" element={<About />} />
               <Route path="recipes" element={<Recipes />} />
               <Route path="contact" element={<Contact />} />
+              <Route path="auth" element={<Auth />} />
               <Route path="checkout" element={<Checkout />} />
               <Route path="*" element={<NotFound />} />
             </Route>
