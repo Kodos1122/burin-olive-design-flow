@@ -1,6 +1,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
+import { Environment } from '@react-three/drei';
 import * as THREE from 'three';
 
 const Bottle = ({ isTilted, onTiltComplete }: { isTilted: boolean; onTiltComplete: () => void; }) => {
@@ -22,22 +23,31 @@ const Bottle = ({ isTilted, onTiltComplete }: { isTilted: boolean; onTiltComplet
     }
   });
 
+  const glassMaterialProps = {
+    color: new THREE.Color("#1A3326"),
+    transmission: 1,
+    roughness: 0.05,
+    thickness: 2.5,
+    ior: 1.52,
+    metalness: 0,
+  };
+
   return (
-    <group ref={group} position={[0, -0.5, 0]} scale={1.2}>
+    <group ref={group} position={[0, -1.5, 0]} scale={2.5}>
       {/* Bottle Body */}
       <mesh>
-        <cylinderGeometry args={[0.5, 0.6, 2.5, 32]} />
-        <meshStandardMaterial color="#1A3326" roughness={0.3} metalness={0.2} />
+        <cylinderGeometry args={[0.5, 0.6, 2.5, 64]} />
+        <meshPhysicalMaterial {...glassMaterialProps} />
       </mesh>
       {/* Bottle Shoulder */}
       <mesh position={[0, 1.25, 0]}>
-        <coneGeometry args={[0.6, 0.5, 32]} />
-         <meshStandardMaterial color="#1A3326" roughness={0.3} metalness={0.2} />
+        <coneGeometry args={[0.6, 0.5, 64]} />
+        <meshPhysicalMaterial {...glassMaterialProps} />
       </mesh>
       {/* Bottle Neck */}
       <mesh position={[0, 1.6, 0]}>
-        <cylinderGeometry args={[0.2, 0.25, 0.5, 32]} />
-        <meshStandardMaterial color="#1A3326" roughness={0.3} metalness={0.2} />
+        <cylinderGeometry args={[0.2, 0.25, 0.5, 64]} />
+        <meshPhysicalMaterial {...glassMaterialProps} />
       </mesh>
        {/* Cap */}
        <mesh position={[0, 1.9, 0]}>
@@ -69,7 +79,7 @@ const OilDrop = ({ id, initialPosition, onFallen }: OilDropProps) => {
   return (
     <mesh ref={mesh} position={initialPosition}>
       <sphereGeometry args={[0.08, 16, 16]} />
-      <meshStandardMaterial color="#FAD550" emissive="#D4AF37" roughness={0.1} metalness={0.5} transparent opacity={0.9} />
+      <meshStandardMaterial color="#FAD550" emissive="#A88B3F" roughness={0.1} metalness={0.7} transparent opacity={0.95} />
     </mesh>
   );
 };
@@ -90,7 +100,7 @@ const HeroAnimation = () => {
             if (dropCount < 7) {
                 const newDrop = { 
                   id: Date.now() + Math.random(), 
-                  position: new THREE.Vector3(-1.6 + (Math.random() - 0.5) * 0.2, 1.0 + (Math.random() - 0.5) * 0.2, (Math.random() - 0.5) * 0.2)
+                  position: new THREE.Vector3(-3.35 + (Math.random() - 0.5) * 0.2, 1.85 + (Math.random() - 0.5) * 0.2, (Math.random() - 0.5) * 0.2)
                 };
                 setDrops(prev => [...prev, newDrop]);
                 dropCount++;
@@ -109,9 +119,10 @@ const HeroAnimation = () => {
     
     return (
         <Canvas camera={{ position: [0, 0, 8], fov: 45 }} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-            <ambientLight intensity={1.5} />
-            <directionalLight position={[5, 5, 5]} intensity={2.5} color="#FFD700" />
-            <directionalLight position={[-5, -5, -5]} intensity={1} color="#FFFFFF" />
+            <ambientLight intensity={0.5} />
+            <directionalLight position={[5, 5, 5]} intensity={1.5} />
+            <directionalLight position={[-5, 5, -5]} intensity={0.5} color="#FFFFFF" />
+            <Environment preset="city" />
             <Bottle isTilted={isTilted} onTiltComplete={handleTiltComplete} />
             {drops.map(drop => (
                 <OilDrop key={drop.id} id={drop.id} initialPosition={drop.position} onFallen={handleDropFallen} />
