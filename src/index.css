@@ -14,8 +14,8 @@
     --popover: 80 10% 10%;         /* Dark Olive */
     --popover-foreground: 47 56% 94%;
 
-    --primary: 45 95% 51%;         /* Gold/Amber */
-    --primary-foreground: 30 50% 8%;
+    --primary: 82 39% 30%;         /* Olive Green */
+    --primary-foreground: 47 56% 94%;
 
     --secondary: 80 8% 20%;        /* Lighter Dark Olive */
     --secondary-foreground: 47 56% 94%;
@@ -43,8 +43,8 @@
     --card-foreground: 47 56% 94%;
     --popover: 80 10% 10%;
     --popover-foreground: 47 56% 94%;
-    --primary: 45 95% 51%;
-    --primary-foreground: 30 50% 8%;
+    --primary: 82 39% 30%;
+    --primary-foreground: 47 56% 94%;
     --secondary: 80 8% 20%;
     --secondary-foreground: 47 56% 94%;
     --muted: 80 8% 20%;
