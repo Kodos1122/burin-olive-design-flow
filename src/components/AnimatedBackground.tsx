@@ -1,6 +1,6 @@
 
 import * as THREE from 'three';
-import { Canvas, extend, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { shaderMaterial } from '@react-three/drei';
 import { useRef, useEffect } from 'react';
 
@@ -114,8 +114,6 @@ const LiquidGoldMaterial = shaderMaterial(
   `
 );
 
-extend({ LiquidGoldMaterial });
-
 const Scene = () => {
   const materialRef = useRef<any>();
   const scrollY = useRef(0);
@@ -138,8 +136,7 @@ const Scene = () => {
   return (
     <mesh scale={[1.5, 1.5, 1.5]}>
       <planeGeometry args={[10, 10]} />
-      {/* @ts-ignore */}
-      <liquidGoldMaterial ref={materialRef} key={LiquidGoldMaterial.key} />
+      <LiquidGoldMaterial ref={materialRef} key={LiquidGoldMaterial.key} attach="material" />
     </mesh>
   );
 };
@@ -155,4 +152,3 @@ const AnimatedBackground = () => {
 };
 
 export default AnimatedBackground;
-
