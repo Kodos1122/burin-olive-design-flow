@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment } from '@react-three/drei';
@@ -23,35 +24,54 @@ const Bottle = ({ isTilted, onTiltComplete }: { isTilted: boolean; onTiltComplet
   });
 
   const glassMaterialProps = {
-    color: new THREE.Color("#1A3326"),
+    color: new THREE.Color("white"),
     transmission: 1,
-    roughness: 0.05,
-    thickness: 2.5,
-    ior: 1.52,
+    roughness: 0,
+    thickness: 0.2,
+    ior: 1.5,
     metalness: 0,
+    transparent: true,
+    opacity: 0.3,
   };
 
+  const oilMaterial = (
+    <meshPhysicalMaterial
+        color="#FAD550"
+        transmission={0.5}
+        thickness={1}
+        roughness={0.1}
+        ior={1.47}
+        metalness={0}
+    />
+  );
+
   return (
-    <group ref={group} position={[0, -1.5, 0]} scale={2.5}>
+    <group ref={group} position={[0, -1, 0]} scale={2}>
+      {/* Oil inside */}
+      <mesh position={[0, -0.075, 0]}>
+          <cylinderGeometry args={[0.7 * 0.95, 0.7 * 0.95, 1.5 * 0.9, 64]} />
+          {oilMaterial}
+      </mesh>
+      
       {/* Bottle Body */}
       <mesh>
-        <cylinderGeometry args={[0.5, 0.6, 2.5, 64]} />
+        <cylinderGeometry args={[0.7, 0.7, 1.5, 64]} />
         <meshPhysicalMaterial {...glassMaterialProps} />
       </mesh>
       {/* Bottle Shoulder */}
-      <mesh position={[0, 1.25, 0]}>
-        <coneGeometry args={[0.6, 0.5, 64]} />
+      <mesh position={[0, 1, 0]}>
+        <cylinderGeometry args={[0.3, 0.7, 0.5, 64]} />
         <meshPhysicalMaterial {...glassMaterialProps} />
       </mesh>
       {/* Bottle Neck */}
-      <mesh position={[0, 1.6, 0]}>
-        <cylinderGeometry args={[0.2, 0.25, 0.5, 64]} />
+      <mesh position={[0, 1.45, 0]}>
+        <cylinderGeometry args={[0.3, 0.3, 0.4, 64]} />
         <meshPhysicalMaterial {...glassMaterialProps} />
       </mesh>
-       {/* Cap */}
-       <mesh position={[0, 1.9, 0]}>
-        <cylinderGeometry args={[0.28, 0.28, 0.2, 32]} />
-        <meshStandardMaterial color="#B08D57" roughness={0.4} metalness={0.8} />
+       {/* Cork Cap */}
+       <mesh position={[0, 1.7, 0]}>
+        <cylinderGeometry args={[0.28, 0.3, 0.5, 32]} />
+        <meshStandardMaterial color="#b08d57" roughness={0.9} metalness={0.1} />
       </mesh>
     </group>
   );
@@ -108,8 +128,8 @@ const HeroAnimation = () => {
             if (dropCount < 7) {
                 const newDrop = { 
                   id: Date.now() + Math.random(), 
-                  // Position calculated to match the bottle's tilted spout
-                  position: new THREE.Vector3(2.83 + (Math.random() - 0.5) * 0.4, 2.21 + (Math.random() - 0.5) * 0.1, (Math.random() - 0.5) * 0.4)
+                  // Position calculated to match the new bottle's tilted spout
+                  position: new THREE.Vector3(2.04 + (Math.random() - 0.5) * 0.2, 1.2 + (Math.random() - 0.5) * 0.1, (Math.random() - 0.5) * 0.2)
                 };
                 setDrops(prev => [...prev, newDrop]);
                 dropCount++;
