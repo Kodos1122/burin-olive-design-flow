@@ -1,7 +1,8 @@
+
 import * as THREE from 'three';
-import { Canvas, extend, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { shaderMaterial } from '@react-three/drei';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useMemo } from 'react';
 
 const LiquidGoldMaterial = shaderMaterial(
   // Uniforms
@@ -113,8 +114,6 @@ const LiquidGoldMaterial = shaderMaterial(
   `
 );
 
-extend({ LiquidGoldMaterial });
-
 const Scene = () => {
   const materialRef = useRef<any>();
   const scrollY = useRef(0);
@@ -134,11 +133,12 @@ const Scene = () => {
     }
   });
 
+  const material = useMemo(() => new LiquidGoldMaterial(), []);
+
   return (
     <mesh scale={[1.5, 1.5, 1.5]}>
       <planeGeometry args={[10, 10]} />
-      {/* @ts-ignore */}
-      <liquidGoldMaterial ref={materialRef} attach="material" />
+      <primitive object={material} ref={materialRef} attach="material" />
     </mesh>
   );
 };
