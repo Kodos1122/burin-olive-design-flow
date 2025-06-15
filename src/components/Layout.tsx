@@ -2,10 +2,12 @@
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
+import AnimatedBackground from "./AnimatedBackground";
 
 const Layout = () => {
   return (
-    <div className="font-sans antialiased bg-background/85">
+    <div className="font-sans antialiased">
+      <AnimatedBackground />
       <Header />
       <main>
         <Outlet />
@@ -16,3 +18,4 @@ const Layout = () => {
 };
 
 export default Layout;
+
