@@ -9,9 +9,9 @@ const LiquidGoldMaterial = shaderMaterial(
   {
     uTime: 0,
     uScroll: 0,
-    uColor1: new THREE.Color('#DAA520'), // GoldenRod
-    uColor2: new THREE.Color('#6B8E23'), // OliveDrab
-    uColor3: new THREE.Color('#556B2F'), // DarkOliveGreen
+    uColor1: new THREE.Color('#FFEA00'), // Canary Yellow
+    uColor2: new THREE.Color('#FFD700'), // Gold
+    uColor3: new THREE.Color('#B8860B'), // DarkGoldenRod
   },
   // Vertex Shader
   `
@@ -99,15 +99,15 @@ const LiquidGoldMaterial = shaderMaterial(
     void main() {
       float scrollEffect = uScroll * 0.002;
       
-      vec2 pos = vUv * 2.5;
-      float noise1 = cnoise(vec3(pos.x, pos.y + scrollEffect, uTime * 0.05));
-      float noise2 = cnoise(vec3(pos.x * 2.0, pos.y * 2.0 + scrollEffect, uTime * 0.1));
+      vec2 pos = vUv * vec2(3.0, 1.0); // Stretch the noise horizontally
+      float noise1 = cnoise(vec3(pos.x, pos.y + scrollEffect, uTime * 0.04)); // Slower movement
+      float noise2 = cnoise(vec3(pos.x * 2.0, pos.y * 2.0 + scrollEffect, uTime * 0.08)); // Slower movement
       
       float combinedNoise = (noise1 + noise2 * 0.5) / 1.5;
       combinedNoise = smoothstep(0.4, 0.6, combinedNoise);
 
       vec3 color = mix(uColor1, uColor2, combinedNoise);
-      color = mix(color, uColor3, smoothstep(0.55, 0.7, combinedNoise));
+      color = mix(color, uColor3, smoothstep(0.5, 0.7, combinedNoise));
 
       gl_FragColor = vec4(color, 1.0);
     }
