@@ -5,6 +5,7 @@ import { products } from "@/data/products";
 import { reviews } from "@/data/reviews";
 import ProductCard from "@/components/ProductCard";
 import ReviewCard from "@/components/ReviewCard";
+import HeroAnimation from "@/components/HeroAnimation";
 
 const Index = () => {
   return (
@@ -12,9 +13,9 @@ const Index = () => {
       {/* Hero Section */}
       <section 
         className="relative h-[70vh] min-h-[500px] flex items-center justify-center text-center text-white"
-        style={{ backgroundImage: `url(/lovable-uploads/8c98b6f9-0a75-4c6c-a338-e113ad42aadb.png)`, backgroundSize: 'cover', backgroundPosition: 'center' }}
       >
-        <div className="absolute inset-0 bg-black/50" />
+        <HeroAnimation />
+        <div className="absolute inset-0 bg-black/30" />
         <div className="relative z-10 p-4">
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight">The Essence of Burin</h1>
           <p className="mt-4 max-w-xl mx-auto text-lg text-gray-200">
