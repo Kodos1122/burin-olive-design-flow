@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment } from '@react-three/drei';
@@ -66,10 +65,11 @@ interface OilDropProps {
 
 const OilDrop = ({ id, initialPosition, onFallen }: OilDropProps) => {
   const mesh = useRef<THREE.Mesh>(null!);
+  const speed = useRef(4 + Math.random() * 2);
   
   useFrame((state, delta) => {
     if (mesh.current) {
-      mesh.current.position.y -= 4 * delta;
+      mesh.current.position.y -= speed.current * delta;
       if (mesh.current.position.y < -5) { // When it's off-screen
         onFallen(id);
       }
@@ -77,9 +77,17 @@ const OilDrop = ({ id, initialPosition, onFallen }: OilDropProps) => {
   });
   
   return (
-    <mesh ref={mesh} position={initialPosition}>
-      <sphereGeometry args={[0.08, 16, 16]} />
-      <meshStandardMaterial color="#FAD550" emissive="#A88B3F" roughness={0.1} metalness={0.7} transparent opacity={0.95} />
+    <mesh ref={mesh} position={initialPosition} scale={[0.7, 1.2, 0.7]}>
+      <sphereGeometry args={[0.08, 32, 32]} />
+      <meshPhysicalMaterial 
+        color="#FAD550"
+        transmission={0.9}
+        thickness={0.5}
+        roughness={0.05}
+        ior={1.47} // Index of refraction for olive oil
+        metalness={0}
+        transparent
+      />
     </mesh>
   );
 };
@@ -100,7 +108,8 @@ const HeroAnimation = () => {
             if (dropCount < 7) {
                 const newDrop = { 
                   id: Date.now() + Math.random(), 
-                  position: new THREE.Vector3(-3.35 + (Math.random() - 0.5) * 0.2, 1.85 + (Math.random() - 0.5) * 0.2, (Math.random() - 0.5) * 0.2)
+                  // Position calculated to match the bottle's tilted spout
+                  position: new THREE.Vector3(2.83 + (Math.random() - 0.5) * 0.4, 2.21 + (Math.random() - 0.5) * 0.1, (Math.random() - 0.5) * 0.4)
                 };
                 setDrops(prev => [...prev, newDrop]);
                 dropCount++;
