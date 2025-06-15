@@ -9,9 +9,9 @@ const LiquidGoldMaterial = shaderMaterial(
   {
     uTime: 0,
     uScroll: 0,
-    uColor1: new THREE.Color('#FFD700'), // Gold
-    uColor2: new THREE.Color('#F0E68C'), // Khaki
-    uColor3: new THREE.Color('#B8860B'), // DarkGoldenRod
+    uColor1: new THREE.Color('#DAA520'), // GoldenRod
+    uColor2: new THREE.Color('#6B8E23'), // OliveDrab
+    uColor3: new THREE.Color('#556B2F'), // DarkOliveGreen
   },
   // Vertex Shader
   `
@@ -99,9 +99,9 @@ const LiquidGoldMaterial = shaderMaterial(
     void main() {
       float scrollEffect = uScroll * 0.002;
       
-      vec2 pos = vUv * 4.0;
-      float noise1 = cnoise(vec3(pos.x, pos.y + scrollEffect, uTime * 0.1));
-      float noise2 = cnoise(vec3(pos.x * 2.0, pos.y * 2.0 + scrollEffect, uTime * 0.2));
+      vec2 pos = vUv * 2.5;
+      float noise1 = cnoise(vec3(pos.x, pos.y + scrollEffect, uTime * 0.05));
+      float noise2 = cnoise(vec3(pos.x * 2.0, pos.y * 2.0 + scrollEffect, uTime * 0.1));
       
       float combinedNoise = (noise1 + noise2 * 0.5) / 1.5;
       combinedNoise = smoothstep(0.4, 0.6, combinedNoise);
