@@ -138,7 +138,7 @@ const Scene = () => {
     <mesh scale={[1.5, 1.5, 1.5]}>
       <planeGeometry args={[10, 10]} />
       {/* @ts-ignore */}
-      <liquidGoldMaterial ref={materialRef} key={LiquidGoldMaterial.key} attach="material" />
+      <liquidGoldMaterial ref={materialRef} attach="material" />
     </mesh>
   );
 };
@@ -146,7 +146,7 @@ const Scene = () => {
 const AnimatedBackground = () => {
   return (
     <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: -10 }}>
-      <Canvas camera={{ position: [0, 0, 1.5], fov: 75 }}>
+      <Canvas>
         <Scene />
       </Canvas>
     </div>
