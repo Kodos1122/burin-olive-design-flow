@@ -15,7 +15,7 @@ const navLinks = [
 
 const Header = () => {
   const { cartCount } = useCart();
-  const activeLinkClass = "text-primary";
+  const activeLinkClass = "text-primary font-semibold";
   const inactiveLinkClass = "hover:text-primary transition-colors";
 
   const handleComingSoon = () => {
@@ -23,12 +23,12 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 items-center">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-20 items-center">
         <div className="mr-4 hidden md:flex">
-          <Link to="/" className="mr-6 flex items-center space-x-2">
-            <Leaf className="h-6 w-6 text-primary" />
-            <span className="hidden font-bold sm:inline-block">Burin</span>
+          <Link to="/" className="mr-8 flex items-center space-x-2">
+            <Leaf className="h-7 w-7 text-primary" />
+            <span className="hidden font-bold sm:inline-block text-2xl font-serif">Burin</span>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium">
             {navLinks.map((link) => (
@@ -50,15 +50,15 @@ const Header = () => {
              <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon">
-                  <Menu className="h-5 w-5" />
+                  <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="left">
-                <Link to="/" className="mr-6 flex items-center space-x-2 mb-6">
-                  <Leaf className="h-6 w-6 text-primary" />
-                  <span className="font-bold">Burin</span>
+              <SheetContent side="left" className="bg-background border-r-border">
+                <Link to="/" className="mr-6 flex items-center space-x-2 mb-8">
+                  <Leaf className="h-7 w-7 text-primary" />
+                  <span className="font-bold text-2xl font-serif">Burin</span>
                 </Link>
-                <nav className="flex flex-col space-y-4">
+                <nav className="flex flex-col space-y-6 text-lg">
                   {navLinks.map((link) => (
                     <NavLink
                       key={link.to}
@@ -76,20 +76,20 @@ const Header = () => {
           </div>
           <div className="flex items-center">
             <Button variant="ghost" size="icon" onClick={handleComingSoon}>
-              <Search className="h-5 w-5" />
+              <Search className="h-6 w-6" />
             </Button>
             <Link to="/checkout" className="relative">
               <Button variant="ghost" size="icon">
-                <ShoppingCart className="h-5 w-5" />
+                <ShoppingCart className="h-6 w-6" />
                 {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
+                  <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
                     {cartCount}
                   </span>
                 )}
               </Button>
             </Link>
             <Button variant="ghost" size="icon" onClick={handleComingSoon}>
-              <User className="h-5 w-5" />
+              <User className="h-6 w-6" />
             </Button>
           </div>
         </div>

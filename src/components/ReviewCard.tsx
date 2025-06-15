@@ -9,23 +9,21 @@ interface ReviewCardProps {
 
 const ReviewCard = ({ review }: ReviewCardProps) => {
   return (
-    <div className="p-6 border rounded-lg">
-      <div className="flex items-center mb-4">
-        <Avatar>
-          <AvatarImage src={review.avatar} alt={review.name} />
-          <AvatarFallback><User /></AvatarFallback>
-        </Avatar>
-        <div className="ml-4">
-          <p className="font-semibold">{review.name}</p>
-          <p className="text-sm text-muted-foreground">{review.date}</p>
-        </div>
+    <div className="p-8 bg-card border border-border/50 rounded-lg shadow-xl flex flex-col items-center text-center">
+      <Avatar className="w-20 h-20 mb-4 border-2 border-primary">
+        <AvatarImage src={review.avatar} alt={review.name} />
+        <AvatarFallback><User /></AvatarFallback>
+      </Avatar>
+      <div className="mb-4">
+        <p className="font-bold text-xl">{review.name}</p>
+        <p className="text-sm text-muted-foreground">{review.date}</p>
       </div>
-      <div className="flex mb-2">
+      <div className="flex mb-4">
         {Array.from({ length: 5 }).map((_, i) => (
-          <Star key={i} className={`h-5 w-5 ${i < review.rating ? 'text-yellow-400 fill-yellow-400' : 'text-muted-foreground'}`} />
+          <Star key={i} className={`h-6 w-6 ${i < review.rating ? 'text-primary fill-primary' : 'text-muted-foreground/50'}`} />
         ))}
       </div>
-      <p className="text-muted-foreground">"{review.quote}"</p>
+      <p className="text-lg text-muted-foreground italic leading-relaxed">"{review.quote}"</p>
     </div>
   );
 };

@@ -3,38 +3,50 @@ import { Link } from "react-router-dom";
 import { Leaf, Twitter, Instagram, Facebook } from "lucide-react";
 
 const Footer = () => {
-  const links = [
-    { to: "/shop", label: "Shop" },
-    { to: "/about", label: "About" },
-    { to: "/recipes", label: "Recipes" },
-    { to: "/contact", label: "Contact" },
-    { to: "/", label: "Privacy Policy" },
-    { to: "/", label: "Terms of Service" },
-  ];
   return (
-    <footer className="border-t bg-background/80 backdrop-blur-md">
-      <div className="container py-12">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex flex-col items-center md:items-start">
+    <footer className="border-t bg-secondary">
+      <div className="container py-16">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+          
+          <div className="md:col-span-1">
              <Link to="/" className="flex items-center space-x-2 mb-4">
                 <Leaf className="h-8 w-8 text-primary" />
-                <span className="text-2xl font-bold">Burin</span>
+                <span className="text-3xl font-bold font-serif">Burin</span>
              </Link>
+             <p className="text-muted-foreground text-sm">Crafted with passion, bottled with love. The finest olive oil since 1923.</p>
+          </div>
+
+          <div>
+            <h4 className="font-bold tracking-wider uppercase text-muted-foreground mb-4 text-sm">Explore</h4>
+            <nav className="flex flex-col space-y-2">
+              <Link to="/shop" className="hover:text-primary transition-colors">Shop</Link>
+              <Link to="/about" className="hover:text-primary transition-colors">About Us</Link>
+              <Link to="/recipes" className="hover:text-primary transition-colors">Recipes</Link>
+              <Link to="/contact" className="hover:text-primary transition-colors">Contact</Link>
+            </nav>
+          </div>
+
+          <div>
+            <h4 className="font-bold tracking-wider uppercase text-muted-foreground mb-4 text-sm">Support</h4>
+            <nav className="flex flex-col space-y-2">
+              <Link to="#" className="hover:text-primary transition-colors">FAQ</Link>
+              <Link to="#" className="hover:text-primary transition-colors">Shipping & Returns</Link>
+              <Link to="#" className="hover:text-primary transition-colors">Privacy Policy</Link>
+              <Link to="#" className="hover:text-primary transition-colors">Terms of Service</Link>
+            </nav>
+          </div>
+
+          <div>
+            <h4 className="font-bold tracking-wider uppercase text-muted-foreground mb-4 text-sm">Follow Us</h4>
              <div className="flex space-x-4">
-                <a href="#"><Instagram className="h-5 w-5 hover:text-primary transition-colors" /></a>
-                <a href="#"><Facebook className="h-5 w-5 hover:text-primary transition-colors" /></a>
-                <a href="#"><Twitter className="h-5 w-5 hover:text-primary transition-colors" /></a>
+                <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Instagram className="h-6 w-6" /></a>
+                <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Facebook className="h-6 w-6" /></a>
+                <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Twitter className="h-6 w-6" /></a>
              </div>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-4 text-center md:text-left">
-            {links.map((link) => (
-              <Link key={link.label} to={link.to} className="hover:text-primary transition-colors">
-                {link.label}
-              </Link>
-            ))}
-          </div>
+
         </div>
-        <div className="mt-12 pt-8 border-t text-center text-muted-foreground text-sm">
+        <div className="mt-16 pt-8 border-t border-border/50 text-center text-muted-foreground text-sm">
           <p>&copy; {new Date().getFullYear()} Burin Olive Oil. All rights reserved.</p>
         </div>
       </div>
