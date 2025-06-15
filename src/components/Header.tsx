@@ -3,6 +3,8 @@ import { Link, NavLink } from "react-router-dom";
 import { Leaf, Search, ShoppingCart, User, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useCart } from "@/context/CartContext";
+import { toast } from "sonner";
 
 const navLinks = [
   { to: "/shop", label: "Shop" },
@@ -12,8 +14,13 @@ const navLinks = [
 ];
 
 const Header = () => {
+  const { cartCount } = useCart();
   const activeLinkClass = "text-primary";
   const inactiveLinkClass = "hover:text-primary transition-colors";
+
+  const handleComingSoon = () => {
+    toast.info("Feature coming soon!");
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -68,15 +75,20 @@ const Header = () => {
             </Sheet>
           </div>
           <div className="flex items-center">
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" onClick={handleComingSoon}>
               <Search className="h-5 w-5" />
             </Button>
-            <Link to="/checkout">
+            <Link to="/checkout" className="relative">
               <Button variant="ghost" size="icon">
                 <ShoppingCart className="h-5 w-5" />
+                {cartCount > 0 && (
+                  <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
+                    {cartCount}
+                  </span>
+                )}
               </Button>
             </Link>
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" onClick={handleComingSoon}>
               <User className="h-5 w-5" />
             </Button>
           </div>

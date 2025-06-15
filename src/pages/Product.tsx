@@ -1,16 +1,28 @@
 
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { products } from "@/data/products";
 import { Button } from "@/components/ui/button";
 import NotFound from "./NotFound";
+import { useCart } from "@/context/CartContext";
 
 const Product = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const { addToCart } = useCart();
   const product = products.find((p) => p.id === id);
 
   if (!product) {
     return <NotFound />;
   }
+
+  const handleAddToCart = () => {
+    addToCart(product);
+  };
+
+  const handleBuyNow = () => {
+    addToCart(product);
+    navigate("/checkout");
+  };
 
   return (
     <div className="container py-12">
@@ -46,8 +58,8 @@ const Product = () => {
           </div>
           
           <div className="mt-8 flex gap-4">
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground flex-1">Add to Cart</Button>
-            <Button size="lg" variant="outline" className="flex-1">Buy Now</Button>
+            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground flex-1" onClick={handleAddToCart}>Add to Cart</Button>
+            <Button size="lg" variant="outline" className="flex-1" onClick={handleBuyNow}>Buy Now</Button>
           </div>
         </div>
       </div>
