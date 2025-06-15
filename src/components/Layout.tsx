@@ -5,7 +5,7 @@ import Footer from "./Footer";
 
 const Layout = () => {
   return (
-    <div className="font-sans antialiased">
+    <div className="font-sans antialiased bg-background/85">
       <Header />
       <main>
         <Outlet />

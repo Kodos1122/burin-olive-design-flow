@@ -64,6 +64,10 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background-image: url('/lovable-uploads/38867c30-c6f4-41e1-a225-f0b218099ca3.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
   }
 }

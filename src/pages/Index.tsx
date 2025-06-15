@@ -29,7 +29,7 @@ const Index = () => {
 
       {/* Our Story Section */}
       <section className="py-24">
-        <div className="container text-center max-w-3xl">
+        <div className="container text-center max-w-3xl bg-background/60 backdrop-blur-md p-8 md:p-12 rounded-lg">
           <h2 className="text-3xl font-bold tracking-tight">Our Story</h2>
           <p className="mt-4 text-lg text-muted-foreground">
             Burin olive oil is born from a legacy of craftsmanship, where each bottle encapsulates the essence of our family's dedication to quality and tradition. Our olives are hand-picked and cold-pressed to preserve their natural flavors and health benefits, ensuring a taste that is both authentic and exceptional.
@@ -38,7 +38,7 @@ const Index = () => {
       </section>
 
       {/* Featured Products Section */}
-      <section className="py-24 bg-secondary">
+      <section className="py-24 bg-secondary/70 backdrop-blur-md">
         <div className="container">
           <h2 className="text-3xl font-bold tracking-tight text-center mb-12">Featured Products</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -51,7 +51,7 @@ const Index = () => {
 
       {/* Customer Reviews Section */}
       <section className="py-24">
-        <div className="container">
+        <div className="container bg-background/60 backdrop-blur-md p-8 md:p-12 rounded-lg">
           <h2 className="text-3xl font-bold tracking-tight text-center mb-12">Customer Reviews</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {reviews.map((review) => (

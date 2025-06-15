@@ -12,7 +12,7 @@ const Footer = () => {
     { to: "/", label: "Terms of Service" },
   ];
   return (
-    <footer className="border-t">
+    <footer className="border-t bg-background/80 backdrop-blur-md">
       <div className="container py-12">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex flex-col items-center md:items-start">
